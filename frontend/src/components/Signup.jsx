@@ -29,7 +29,8 @@ const Signup = () => {
       console.log("User registered successfully:", response.data);
       toast.success("SignUp successful");
 
-      navigate("/");
+      // navigate("/");
+      document.getElementById("my_modal_3").showModal();
     } catch (error) {
       console.error("Error registering user:", error);
       setErrorFromSubmit(
@@ -64,7 +65,9 @@ const Signup = () => {
                   <input
                     type="text"
                     className="grow"
-                    defaultValue={receivedEmail ? receivedEmail.split('@')[0] : null}
+                    defaultValue={
+                      receivedEmail ? receivedEmail.split("@")[0] : null
+                    }
                     placeholder="Enter full name"
                     {...register("name", { required: true })}
                   />
