@@ -1,42 +1,46 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import Login from './Login';
-import { useForm } from 'react-hook-form';
-import axios from 'axios';
-import toast from 'react-hot-toast';
+import React, { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import Login from "./Login";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const Signup = () => {
+  const location = useLocation();
+  const [receivedEmail, setReceivedEmail] = useState(
+    location.state ? location.state.email : null
+  );
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const [errorFromSubmit, setErrorFromSubmit] = useState('');
+  const [errorFromSubmit, setErrorFromSubmit] = useState("");
   const navigate = useNavigate();
 
   const handleSubmits = async (data) => {
     const { name, email, password } = data;
     try {
-      const response = await axios.post('http://localhost:4000/user/register', {
+      const response = await axios.post("http://localhost:4000/user/register", {
         fullname: name,
         email,
         password,
       });
-      console.log('User registered successfully:', response.data);
-      toast.success('SignUp successful');
+      console.log("User registered successfully:", response.data);
+      toast.success("SignUp successful");
 
-      navigate('/');
+      navigate("/");
     } catch (error) {
-      console.error('Error registering user:', error);
+      console.error("Error registering user:", error);
       setErrorFromSubmit(
-        'User already exits. Please try again with another email.'
+        "User already exits. Please try again with another email."
       );
-      toast.error('User already exists.');
+      toast.error("User already exists.");
     }
   };
 
   const closeModal = () => {
-    navigate('/');
+    navigate("/");
   };
 
   return (
@@ -60,8 +64,9 @@ const Signup = () => {
                   <input
                     type="text"
                     className="grow"
+                    defaultValue={receivedEmail ? receivedEmail.split('@')[0] : null}
                     placeholder="Enter full name"
-                    {...register('name', { required: true })}
+                    {...register("name", { required: true })}
                   />
                 </label>
                 {errors.name && (
@@ -75,12 +80,13 @@ const Signup = () => {
                   <input
                     type="text"
                     className="grow"
+                    defaultValue={receivedEmail}
                     placeholder="Enter your email"
-                    {...register('email', {
-                      required: 'Email is required',
+                    {...register("email", {
+                      required: "Email is required",
                       pattern: {
                         value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                        message: 'Invalid email address',
+                        message: "Invalid email address",
                       },
                     })}
                   />
@@ -108,8 +114,8 @@ const Signup = () => {
                     type="password"
                     className="grow"
                     placeholder="Enter password"
-                    {...register('password', {
-                      required: 'Password is required',
+                    {...register("password", {
+                      required: "Password is required",
                     })}
                   />
                 </label>
@@ -128,7 +134,7 @@ const Signup = () => {
                 </button>
                 <button
                   onClick={() =>
-                    document.getElementById('my_modal_3').showModal()
+                    document.getElementById("my_modal_3").showModal()
                   }
                   className="mt-2 cursor-pointer block"
                 >
