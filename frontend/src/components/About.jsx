@@ -71,7 +71,7 @@ const About = () => {
             <div className="p-4 pb-6 flex justify-center flex-col items-center">
               <img
                 className="md:block hidden"
-                src="/yadav.jpg"
+                src="/Yadav.jpg"
                 alt="Yadav featured Img"
               />
               <img
