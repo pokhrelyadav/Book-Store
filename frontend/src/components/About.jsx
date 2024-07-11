@@ -41,7 +41,7 @@ const About = () => {
           </h1>
           <p className="font-normal text-base leading-6 text-white ">
             As passionate readers and tech enthusiasts, we realized the need for
-            a streamlined and efficient way to search for books. Whether it's
+            a streamlined and efficient way to search for books. Whether it is
             for academic purposes, personal growth, or leisure reading, finding
             the right book can sometimes be a daunting task. This inspired us to
             combine our love for books with our technical skills, and thus, our
