@@ -3,6 +3,7 @@ import axios from 'axios';
 import Logout from './Logout';
 import Login from './Login';
 import { useAuth } from '../context/AuthProvider';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [authUser, setAuthUser] = useAuth();
@@ -84,6 +85,13 @@ const Navbar = () => {
   const handleInputBlur = () => {
     setIsInputFocused(false);
   };
+  const navigate = useNavigate();
+
+  const handleSuggestionClick = (suggestion) => {
+    setQuery(suggestion.name);
+    setSuggestions([]);
+    navigate(`/book/${suggestion.id}`);
+  };
 
   const navItems = (
     <>
@@ -140,8 +148,8 @@ const Navbar = () => {
         className={`max-w-screen-2xl container mx-auto md:px-20 px-4 dark:bg-slate-900 dark:text-white fixed top-0 right-0 left-0 z-50
           ${
             sticky
-              ? 'sticky-navbar shadow-md bg-base-200 dark:bg-slate-700 dark:text-white duration-300 transition-all ease-in-out'
-              : ''
+              ? "sticky-navbar shadow-md bg-base-200 dark:bg-slate-700 dark:text-white duration-300 transition-all ease-in-out"
+              : ""
           }`}
       >
         <div className="navbar bg-base-200">
@@ -211,13 +219,16 @@ const Navbar = () => {
 
                 {isInputFocused && suggestions.length > 0 && (
                   <div className="autocomplete absolute bg-white mt-2 w-full rounded-full shadow-lg z-10">
-                    {suggestions.map((suggestion, index) => (
+                    {suggestions.map((suggestion) => (
                       <div
-                        key={index}
+                        // key={index}
+                        key={suggestion.id}
                         className="suggestion-item p-2 cursor-pointer hover:bg-pink-500 bg-slate-900"
-                        onClick={() => setQuery(suggestion)}
+                        // onClick={() => setQuery(suggestion)}
+                        // onClick={() => setQuery(suggestion.title)}
+                        onMouseDown={() => handleSuggestionClick(suggestion)}
                       >
-                        {suggestion}
+                        {suggestion.name}
                       </div>
                     ))}
                   </div>
@@ -247,7 +258,7 @@ const Navbar = () => {
                   className="swap-off h-7 w-7 fill-current"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
-                  onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
                 >
                   <path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,6a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM16.36,17A1,1,0,0,0,17,16.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
                 </svg>
@@ -257,7 +268,7 @@ const Navbar = () => {
                   className="swap-on h-7 w-7 fill-current"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
-                  onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+                  onClick={() => setTheme(theme === "light" ? "dark" : "light")}
                 >
                   <path d="M21.64,13a1,1,0,0,0-1.05-.14,6.05,6.05,0,0,1-3.37.73A6.15,6.15,0,0,1,9.06,5.49a6.59,6.59,0,0,1,.25-2A1,1,0,0,0,6,2.36,6.14,6.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A6.14,6.14,0,0,1,7.06,5.22v.27A10.15,6.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A6.11,6.11,0,0,1,12.14,19.73Z" />
                 </svg>
@@ -269,7 +280,7 @@ const Navbar = () => {
                   <a
                     className="btn btn-ghost bg-black text-white border-box pt-4 hover:bg-slate-600 duration-300 ml-5 hidden lg:block"
                     onClick={() =>
-                      document.getElementById('my_modal_3').showModal()
+                      document.getElementById("my_modal_3").showModal()
                     }
                   >
                     Login
