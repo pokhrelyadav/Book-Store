@@ -1,41 +1,45 @@
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import axios from 'axios';
-import { json, Link, useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import { json, Link, useLocation, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Login = () => {
+  //functionality to receive state from course/signup
+  //if user navigate to course->signup->login then only should be redirected to course page
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const location = useLocation(); //To know the current path and states
   const navigate = useNavigate();
-  const [loginError, setLoginError] = useState('');
+  const [loginError, setLoginError] = useState("");
 
   const onSubmit = async (data) => {
     const { email, password } = data;
     try {
-      const response = await axios.post('http://localhost:4000/user/login', {
+      const response = await axios.post("http://localhost:4000/user/login", {
         email,
         password,
       });
-      console.log('Login successful:', response.data);
-      setLoginError('');
+      console.log("Login successful:", response.data);
+      setLoginError("");
       closeModal();
-      localStorage.setItem('user', JSON.stringify(response.data.user));
-      navigate('/');
-      toast.success('Login successful');
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+      const redirectTo = location.state?.from || "/"; //if previous state is course, navigate to that after login, else homepage
+      navigate(redirectTo); //modified redirect
+      toast.success("Login successful");
       closeModal;
       window.location.reload();
     } catch (error) {
-      console.error('Error logging in:', error);
-      setLoginError('Invalid email or password');
+      console.error("Error logging in:", error);
+      setLoginError("Invalid email or password");
     }
   };
 
   const closeModal = () => {
-    const modal = document.getElementById('my_modal_3');
+    const modal = document.getElementById("my_modal_3");
     if (modal) {
       modal.close();
     }
@@ -71,11 +75,11 @@ const Login = () => {
                     type="text"
                     className="grow"
                     placeholder="Email"
-                    {...register('email', {
-                      required: 'Email is required',
+                    {...register("email", {
+                      required: "Email is required",
                       pattern: {
                         value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                        message: 'Invalid email address',
+                        message: "Invalid email address",
                       },
                     })}
                   />
@@ -103,8 +107,8 @@ const Login = () => {
                     type="password"
                     className="grow"
                     placeholder="Enter password"
-                    {...register('password', {
-                      required: 'Password is required',
+                    {...register("password", {
+                      required: "Password is required",
                     })}
                   />
                 </label>
