@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const About = () => {
   return (
@@ -57,12 +57,12 @@ const About = () => {
               <img
                 className="md:block hidden"
                 src="/Abhisek.jpeg"
-                alt="Alexa featured Img"
+                alt="Abhisek featured Img"
               />
               <img
                 className="md:hidden block"
                 src="/Abhisek.jpeg"
-                alt="Alexa featured Img"
+                alt="Abhisek featured Img"
               />
               <p className="font-medium text-xl leading-5 text-white mt-4">
                 Abhisek
@@ -72,12 +72,12 @@ const About = () => {
               <img
                 className="md:block hidden"
                 src="/yadav.jpg"
-                alt="Olivia featured Img"
+                alt="Yadav featured Img"
               />
               <img
                 className="md:hidden block"
                 src="/Yadav.jpg"
-                alt="Olivia featured Img"
+                alt="Yadav featured Img"
               />
               <p className="font-medium text-xl leading-5 text-white mt-4">
                 Yadav
@@ -87,12 +87,12 @@ const About = () => {
               <img
                 className="md:block hidden"
                 src="/Sanandan.jpg"
-                alt="Liam featued Img"
+                alt="Sanandan featued Img"
               />
               <img
                 className="md:hidden block"
                 src="/Sanandan.jpg"
-                alt="Liam featued Img"
+                alt="Sanandan featued Img"
               />
               <p className="font-medium text-xl leading-5 text-white mt-4">
                 Sanandan
@@ -102,12 +102,12 @@ const About = () => {
               <img
                 className="md:block hidden"
                 src="/Manish.jpg"
-                alt="Elijah featured img"
+                alt="Manish featured img"
               />
               <img
                 className="md:hidden block"
                 src="/Manish.jpg"
-                alt="Elijah featured img"
+                alt="Manish featured img"
               />
               <p className="font-medium text-xl leading-5 text-white mt-4">
                 Manish
