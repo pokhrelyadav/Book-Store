@@ -23,7 +23,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route
             path="/course"
-            element={authUser ? <Courses /> : <Navigate to="/signup" />}
+            element={authUser ? <Courses /> : <Navigate to="/signup" state={{from: "/course"}} />}
           />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/contact" element={<ContactUs />} />
